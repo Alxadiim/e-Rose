@@ -11,22 +11,30 @@
             --primary-pink: #FF69B4;
             --secondary-pink: #FFC0CB;
             --dark-pink: #DB7093;
+            --overlay-dark: rgba(0,0,0,0.35);
         }
 
+        /* Page background image (Octobre Rose theme) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
             min-height: 100vh;
+            /* Background: use the SVG placeholder included in assets/ */
+            background-image: url('assets/octobre_ribbon.svg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
+            padding: 1rem;
         }
 
         .registration-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.98);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
             padding: 2rem;
+            width: 100%;
+            max-width: 460px;
         }
 
         .btn-pink {
@@ -51,24 +59,43 @@
             text-align: center;
             margin-bottom: 2rem;
         }
+        
+        .info-panel {
+            min-height: 80vh;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+
+        .info-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.28), rgba(0,0,0,0.45));
+        }
+
+        .info-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        @media (max-width: 767px) {
+            .info-panel { display: none; }
+        }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('registerForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Ici on simule l'enregistrement
-                window.location.href = 'evaluation.html';
-            });
-        });
-    </script>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
+    <div class="container-fluid">
+        <div class="row align-items-center" style="min-height:100vh;">
+            <div class="col-md-6 d-flex justify-content-center align-items-center" style="min-height:80vh;">
                 <div class="registration-container">
                     <div class="logo">e-Rose</div>
                     <h2 class="text-center mb-4">Créez votre compte</h2>
+
                     <form id="registerForm">
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Nom complet</label>
@@ -95,6 +122,20 @@
                     <p class="text-center mt-3">
                         Déjà inscrit(e) ? <a href="index.html" style="color: var(--primary-pink);">Connectez-vous</a>
                     </p>
+                </div>
+            </div>
+            <div class="col-md-6 d-none d-md-flex">
+                <div class="info-panel w-100" style="background-image: url('assets/octobre_ribbon.svg'); background-size: cover; background-position: center;">
+                    <div class="info-content">
+                        <h3 style="color: #fff;">Octobre Rose</h3>
+                        <p style="color: #f8f8f8;">Octobre Rose est une campagne annuelle de sensibilisation dédiée au dépistage et à la prévention du cancer du sein. Elle encourage les examens réguliers, l'autosurveillance et l'accès à l'information pour améliorer la détection précoce.</p>
+                        <h5 style="color: #fff;">Cancer du sein</h5>
+                        <p style="color: #f8f8f8;">Le cancer du sein est la tumeur la plus fréquente chez la femme. Le dépistage par mammographie et la consultation médicale précoce sont essentiels pour augmenter les chances de traitement réussi.</p>
+                        <h5 style="color: #fff;">Cancer du col de l'utérus</h5>
+                        <p style="color: #f8f8f8;">1ère cause de décès par cancer chez la femme dans les pays en voie de développement : 260 000 décès dont près de 95 % dans les PVD. EPIDEMIOLOGIQUE — Fréquence : 500 000 cas en 2005. Deuxième rang des cancers féminins (15 % de l’ensemble des cancers). 5ème cancer mondial (7,3 % tous sexes). 1er cancer à l’Institut Curie de Dakar (47,3 % en 2002). 2ème cancer gynécologique dans les pays en développement. Diagnostic souvent tardif. Pronostic sombre : cancer hormono-dépendant (taux de létalité : 30 %). Fréquence : 0,2 à 6,6 %. Âge moyen de survenue : 34–35 ans. Il est favorisé par : 1ère grossesse tardive, pauciparité (IP ; IIP), absence d’allaitement.
+                        </p>
+                        <p style="color: #f8f8f8;">Le cancer du col de l'utérus est une maladie où les cellules du col de l'utérus deviennent anormales et peuvent former une tumeur. Il est souvent lié à une infection par le virus HPV et peut être détecté tôt grâce au dépistage.</p>
+                    </div>
                 </div>
             </div>
         </div>

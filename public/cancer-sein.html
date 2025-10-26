@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF69B4">
+    <title>Dépistage du cancer du sein - e-Rose</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- App Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    
+    <style>
+        .symptom-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .symptom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .risk-factor {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .risk-factor i {
+            margin-right: 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+        }
+        
+        .self-exam-step {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .self-exam-step i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .screening-method {
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header class="app-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <a href="index.html" class="text-white me-3">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h1 class="app-title mb-0">Cancer du sein</h1>
+                </div>
+                <div class="d-flex">
+                    <button id="audioToggle" class="btn btn-sm btn-outline-light me-2">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button id="languageToggle" class="btn btn-sm btn-outline-light">
+                        <i class="fas fa-language"></i> FR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="container my-4">
+        <!-- Bannière d'information -->
+        <div class="alert alert-info d-flex align-items-center" role="alert">
+            <i class="fas fa-info-circle me-2"></i>
+            <div>
+                Le dépistage précoce augmente considérablement les chances de guérison.
+            </div>
+        </div>
+
+        <!-- Navigation rapide -->
+        <div class="mb-4">
+            <div class="d-flex overflow-auto pb-2">
+                <a href="#symptomes" class="btn btn-sm btn-outline-primary me-2">
+                    <i class="fas fa-exclamation-triangle me-1"></i> Symptômes
+                </a>
+                <a href="#auto-examen" class="btn btn-sm btn-outline-primary me-2">
+                    <i class="fas fa-hand-holding-medical me-1"></i> Auto-examen
+                </a>
+                <a href="#depistage" class="btn btn-sm btn-outline-primary me-2">
+                    <i class="fas fa-clinic-medical me-1"></i> Dépistage
+                </a>
+                <a href="#facteurs-risque" class="btn btn-sm btn-outline-primary me-2">
+                    <i class="fas fa-exclamation-circle me-1"></i> Facteurs de risque
+                </a>
+                <a href="#ressources" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-book-medical me-1"></i> Ressources
+                </a>
+            </div>
+        </div>
+
+        <!-- Introduction -->
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-3">Qu'est-ce que le cancer du sein ?</h2>
+                    <p class="lead">
+                        Le cancer du sein est une tumeur maligne qui se développe à partir des cellules de la glande mammaire. 
+                        C'est le cancer le plus fréquent chez la femme dans le monde.
+                    </p>
+                    <p>
+                        Une détection précoce permet une meilleure prise en charge et augmente considérablement les chances de guérison. 
+                        C'est pourquoi le dépistage régulier est essentiel, même en l'absence de symptômes.
+                    </p>
+                    <button class="btn btn-pink mt-2" id="readAloudBtn">
+                        <i class="fas fa-volume-up me-2"></i>Écouter cette section
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Femme effectuant un auto-examen des seins" 
+                             class="img-fluid object-fit-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Symptômes -->
+        <section id="symptomes" class="mb-5 pt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-exclamation-triangle text-pink me-2"></i>
+                    Symptômes à surveiller
+                </h2>
+                <button class="btn btn-sm btn-outline-pink" data-bs-toggle="collapse" data-bs-target="#symptomsCollapse">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="collapse show" id="symptomsCollapse">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    La présence d'un ou plusieurs de ces symptômes ne signifie pas nécessairement que vous avez un cancer du sein. 
+                    Cependant, il est important de consulter un professionnel de santé si vous remarquez l'un de ces changements.
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 symptom-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-pink-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-circle-nodes text-pink" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-0">Grosseur ou nodule</h3>
+                                </div>
+                                <p class="card-text">
+                                    Une masse ou un épaississement dans le sein ou sous le bras qui persiste après le cycle menstruel.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 symptom-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-pink-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-droplet text-pink" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-0">Écoulement du mamelon</h3>
+                                </div>
+                                <p class="card-text">
+                                    Écoulement inhabituel, surtout s'il est sanglant, d'un seul sein et sans compression.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 symptom-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-pink-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-arrows-to-dot text-pink" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-0">Rétraction du mamelon</h3>
+                                </div>
+                                <p class="card-text">
+                                    Le mamelon se rétracte ou change de position, ou la peau du sein prend un aspect capitonné.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 symptom-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-pink-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-hand-fist text-pink" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-0">Douleur persistante</h3>
+                                </div>
+                                <p class="card-text">
+                                    Douleur localisée dans une zone du sein qui ne disparaît pas et n'est pas liée au cycle menstruel.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 symptom-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-pink-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-arrow-up-right-dots text-pink" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-0">Changements cutanés</h3>
+                                </div>
+                                <p class="card-text">
+                                    Rougeur, œdème, chaleur, aspect de peau d'orange ou ulcération de la peau du sein.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 symptom-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-pink-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-arrows-up-down-left-right text-pink" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-0">Changement de taille ou de forme</h3>
+                                </div>
+                                <p class="card-text">
+                                    Augmentation de volume ou modification de la forme d'un sein par rapport à l'autre.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-primary mt-4">
+                    <div class="d-flex">
+                        <i class="fas fa-stethoscope me-3 mt-1"></i>
+                        <div>
+                            <h4 class="h5">Quand consulter ?</h4>
+                            <p class="mb-0">
+                                Si vous remarquez l'un de ces changements, prenez rendez-vous avec votre médecin dans les meilleurs délais. 
+                                N'attendez pas que les symptômes s'aggravent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auto-examen -->
+        <section id="auto-examen" class="mb-5 pt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-hand-holding-medical text-pink me-2"></i>
+                    Comment faire un auto-examen des seins ?
+                </h2>
+                <button class="btn btn-sm btn-outline-pink" data-bs-toggle="collapse" data-bs-target="#selfExamCollapse">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="collapse show" id="selfExamCollapse">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    L'auto-examen des seins ne remplace pas les examens médicaux, mais il vous permet de vous familiariser avec vos seins 
+                    et de détecter tout changement inhabituel.
+                </div>
+                
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <h3 class="h5 mb-3">Quand effectuer l'auto-examen ?</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Idéalement 7 à 10 jours après le début des règles</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Si vous n'avez plus de règles, choisissez un jour fixe chaque mois</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Répétez l'examen chaque mois à la même période</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="h5 mb-3">Conseils pratiques</h3>
+                        <div class="card border-0 bg-light">
+                            <div class="card-body">
+                                <ul class="mb-0">
+                                    <li class="mb-2">Placez-vous dans une pièce bien éclairée devant un miroir</li>
+                                    <li class="mb-2">Utilisez la pulpe des doigts, pas les ongles</li>
+                                    <li class="mb-2">Examinez chaque sein séparément</li>
+                                    <li>N'oubliez pas la zone sous les aisselles et jusqu'à la clavicule</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="h5 mb-3">Les étapes de l'auto-examen</h3>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="self-exam-step">
+                            <i class="fas fa-eye"></i>
+                            <h4 class="h6 mb-2">1. Observation devant un miroir</h4>
+                            <p class="small">
+                                Bras le long du corps, puis mains sur les hanches et enfin bras levés. 
+                                Observez la forme, la taille et la peau de vos seins.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="self-exam-step">
+                            <i class="fas fa-hand"></i>
+                            <h4 class="h6 mb-2">2. Palpation debout</h4>
+                            <p class="small">
+                                Levez le bras droit et utilisez la main gauche pour examiner le sein droit. 
+                                Effectuez des mouvements circulaires de l'extérieur vers le mamelon.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="self-exam-step">
+                            <i class="fas fa-bed"></i>
+                            <h4 class="h6 mb-2">3. Palpation allongée</h4>
+                            <p class="small">
+                                Allongez-vous sur le dos avec un coussin sous l'épaule droite. 
+                                Répétez la palpation du sein droit, puis faites de même pour le sein gauche.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn btn-pink" id="setReminderBtn">
+                        <i class="far fa-bell me-2"></i>Programmer un rappel mensuel
+                    </button>
+                    <p class="small text-muted mt-2">Nous vous enverrons une notification pour ne pas oublier votre auto-examen mensuel.</p>
+                </div>
+                
+                <div class="card border-primary mt-4">
+                    <div class="card-header bg-primary text-white">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Quand s'inquiéter ?
+                    </div>
+                    <div class="card-body">
+                        <p>Consultez un médecin si vous remarquez :</p>
+                        <ul>
+                            <li>Une grosseur dure et indolore avec des contours irréguliers</li>
+                            <li>Une modification de la peau (peau d'orange, ulcération, rougeur)</li>
+                            <li>Un écoulement spontané et unilatéral du mamelon</li>
+                            <li>Une rétraction ou une déformation du mamelon</li>
+                            <li>Des ganglions durs dans le creux de l'aisselle</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dépistage -->
+        <section id="depistage" class="mb-5 pt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-clinic-medical text-pink me-2"></i>
+                    Dépistage organisé
+                </h2>
+                <button class="btn btn-sm btn-outline-pink" data-bs-toggle="collapse" data-bs-target="#screeningCollapse">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="collapse show" id="screeningCollapse">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="screening-method">
+                            <h3 class="h5">Mammographie</h3>
+                            <p>
+                                La mammographie est l'examen de référence pour le dépistage du cancer du sein. 
+                                Elle permet de détecter des anomalies avant même qu'elles ne soient palpables.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <span class="badge bg-pink">À partir de 40 ans</span>
+                                <span class="badge bg-pink">Tous les 1-2 ans</span>
+                                <span class="badge bg-pink">Examen indolore</span>
+                            </div>
+                            <button class="btn btn-outline-parkinson btn-sm">
+                                <i class="fas fa-search-location me-1"></i>Trouver un centre de dépistage
+                            </button>
+                        </div>
+                        
+                        <div class="screening-method">
+                            <h3 class="h5">Échographie mammaire</h3>
+                            <p>
+                                Souvent utilisée en complément de la mammographie, surtout chez les femmes jeunes dont les seins sont denses.
+                                Elle permet de mieux caractériser certaines anomalies détectées à la mammographie.
+                            </p>
+                        </div>
+                        
+                        <div class="screening-method">
+                            <h3 class="h5">IRM mammaire</h3>
+                            <p>
+                                Réservée aux femmes à haut risque de cancer du sein (antécédents familiaux, prédisposition génétique).
+                                Elle est plus sensible que la mammographie mais aussi plus coûteuse.
+                            </p>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-4">
+                            <div class="d-flex">
+                                <i class="fas fa-exclamation-triangle me-3 mt-1"></i>
+                                <div>
+                                    <h4 class="h6">Dépistage organisé</h4>
+                                    <p class="mb-0">
+                                        Dans de nombreux pays, un programme de dépistage organisé est proposé aux femmes âgées de 50 à 74 ans. 
+                                        Renseignez-vous auprès de votre médecin ou de votre assurance maladie pour connaître les modalités dans votre région.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h3 class="h5 mb-3">Calendrier de dépistage recommandé</h3>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">20-39 ans</div>
+                                            <small>Auto-examen mensuel<br>Examen clinique tous les 3 ans</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">Prévention</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">40-49 ans</div>
+                                            <small>Mammographie tous les 1-2 ans<br>Selon facteurs de risque</small>
+                                        </div>
+                                        <span class="badge bg-warning text-dark rounded-pill">Surveillance</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">50-74 ans</div>
+                                            <small>Mammographie tous les 2 ans<br>Dans le cadre du dépistage organisé</small>
+                                        </div>
+                                        <span class="badge bg-danger rounded-pill">Recommandé</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">75+ ans</div>
+                                            <small>À discuter avec le médecin traitant<br>Selon l'état de santé</small>
+                                        </div>
+                                        <span class="badge bg-secondary rounded-pill">Cas par cas</span>
+                                    </li>
+                                </ul>
+                                
+                                <div class="mt-4">
+                                    <button class="btn btn-pink w-100" id="scheduleScreeningBtn">
+                                        <i class="far fa-calendar-plus me-2"></i>Planifier un dépistage
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facteurs de risque -->
+        <section id="facteurs-risque" class="mb-5 pt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-exclamation-circle text-pink me-2"></i>
+                    Facteurs de risque
+                </h2>
+                <button class="btn btn-sm btn-outline-parkinson" data-bs-toggle="collapse" data-bs-target="#riskFactorsCollapse">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="collapse show" id="riskFactorsCollapse">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-parkinson text-white">
+                                <i class="fas fa-dna me-2"></i>
+                                Facteurs non modifiables
+                            </div>
+                            <div class="card-body">
+                                <div class="risk-factor">
+                                    <i class="fas fa-venus"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Sexe féminin</h4>
+                                        <p class="small mb-0">Les femmes sont beaucoup plus à risque que les hommes.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-birthday-cake"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Âge</h4>
+                                        <p class="small mb-0">Le risque augmente avec l'âge, surtout après 50 ans.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-syringe"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Antécédents personnels</h4>
+                                        <p class="small mb-0">Avoir déjà eu un cancer du sein augmente le risque d'en développer un autre.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Antécédents familiaux</h4>
+                                        <p class="small mb-0">Risque accru si une parente au 1er degré (mère, sœur, fille) a eu un cancer du sein.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-dna"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Prédisposition génétique</h4>
+                                        <p class="small mb-0">Mutations des gènes BRCA1, BRCA2, PALB2, etc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-parkinson text-white">
+                                <i class="fas fa-sliders-h me-2"></i>
+                                Facteurs modifiables
+                            </div>
+                            <div class="card-body">
+                                <div class="risk-factor">
+                                    <i class="fas fa-wine-glass-alt"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Consommation d'alcool</h4>
+                                        <p class="small mb-0">Même une consommation modérée augmente le risque.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-weight"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Surpoids et obésité</h4>
+                                        <p class="small mb-0">Surtout après la ménopause.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Sédentarité</h4>
+                                        <p class="small mb-0">L'activité physique régulière réduit le risque.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-baby"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Grossesse tardive ou absence de grossesse</h4>
+                                        <p class="small mb-0">Première grossesse après 30 ans ou absence de grossesse menée à terme.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="risk-factor">
+                                    <i class="fas fa-pills"></i>
+                                    <div>
+                                        <h4 class="h6 mb-1">Traitement hormonal</h4>
+                                        <p class="small mb-0">Traitement hormonal substitutif de la ménopause pendant plus de 5 ans.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card border-success mt-4">
+                    <div class="card-header bg-success text-white">
+                        <i class="fas fa-heartbeat me-2"></i>
+                        Prévention
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="h6">Réduisez votre risque</h4>
+                                <ul>
+                                    <li>Maintenez un poids santé</li>
+                                    <li>Pratiquez une activité physique régulière</li>
+                                    <li>Limitez la consommation d'alcool</li>
+                                    <li>Évitez le tabac</li>
+                                    <li>Allaitez si possible</li>
+                                    <li>Limitez le traitement hormonal de la ménopause</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="h6">Dépistage précoce</h4>
+                                <ul>
+                                    <li>Auto-examen mensuel des seins</li>
+                                    <li>Examen clinique régulier par un professionnel de santé</li>
+                                    <li>Mammographie selon les recommandations</li>
+                                    <li>Surveillance renforcée en cas de risque génétique</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ressources -->
+        <section id="ressources" class="mb-5 pt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-book-medical text-pink me-2"></i>
+                    Ressources utiles
+                </h2>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="bg-pink-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-phone-alt text-pink" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <h3 class="h5">Numéros d'urgence</h3>
+                            <p class="small text-muted">Des professionnels à votre écoute pour répondre à vos questions.</p>
+                            <button class="btn btn-outline-parkinson btn-sm">
+                                <i class="fas fa-phone-alt me-1"></i>Voir les numéros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="bg-pink-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-map-marker-alt text-pink" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <h3 class="h5">Centres de dépistage</h3>
+                            <p class="small text-muted">Trouvez le centre de dépistage le plus proche de chez vous.</p>
+                            <button class="btn btn-outline-parkinson btn-sm">
+                                <i class="fas fa-search-location me-1"></i>Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="bg-pink-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-book text-pink" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <h3 class="h5">Brochures d'information</h3>
+                            <p class="small text-muted">Téléchargez des documents d'information sur le dépistage.</p>
+                            <button class="btn btn-outline-parkinson btn-sm">
+                                <i class="fas fa-download me-1"></i>Télécharger
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="bg-pink-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-hands-helping text-pink" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <h3 class="h5">Groupes de soutien</h3>
+                            <p class="small text-muted">Rencontrez d'autres personnes concernées par le cancer du sein.</p>
+                            <button class="btn btn-outline-parkinson btn-sm">
+                                <i class="fas fa-users me-1"></i>Découvrir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body">
+                    <h3 class="h5 mb-3">Questions fréquentes</h3>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">
+                                    À quel âge dois-je commencer le dépistage ?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Les recommandations varient selon les pays et les organismes de santé :</p>
+                                    <ul>
+                                        <li><strong>20-39 ans</strong> : Auto-examen mensuel et examen clinique tous les 3 ans</li>
+                                        <li><strong>40-49 ans</strong> : Discussion avec votre médecin sur l'opportunité d'une mammographie</li>
+                                        <li><strong>50-74 ans</strong> : Mammographie tous les 2 ans dans le cadre du dépistage organisé</li>
+                                    </ul>
+                                    <p class="mb-0">Ces recommandations peuvent varier en fonction de vos facteurs de risque personnels.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                                    La mammographie est-elle douloureuse ?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>La mammographie peut être inconfortable car le sein est comprimé entre deux plaques pour obtenir une image de qualité. Cette compression est nécessaire pour :</p>
+                                    <ul>
+                                        <li>Étaler les tissus mammaires</li>
+                                        <li>Réduire la dose de rayonnement</li>
+                                        <li>Obtenir des images plus nettes</li>
+                                    </ul>
+                                    <p class="mb-0">La gêne est généralement brève et varie selon les femmes. Si vous avez des seins sensibles, évitez de programmer la mammographie la semaine précédant vos règles.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                                    Que faire si je trouve une grosseur dans mon sein ?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Ne paniquez pas. La plupart des grosseurs mammaires ne sont pas cancéreuses. Voici ce qu'il faut faire :</p>
+                                    <ol>
+                                        <li><strong>Ne pas s'affoler</strong> : 8 grosseurs sur 10 sont bénignes</li>
+                                        <li><strong>Prendre rendez-vous</strong> avec votre médecin traitant ou votre gynécologue</li>
+                                        <li><strong>Noter</strong> vos observations : taille, mobilité, sensibilité, changements récents</li>
+                                        <li><strong>Ne pas attendre</strong> que la grosseur disparaisse d'elle-même</li>
+                                    </ol>
+                                    <p class="mb-0">Votre médecin vous prescrira les examens nécessaires (échographie, mammographie, biopsie) pour déterminer la nature de la grosseur.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                                    Le cancer du sein est-il héréditaire ?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Dans la majorité des cas, le cancer du sein n'est pas héréditaire. Cependant :</p>
+                                    <ul>
+                                        <li>5 à 10% des cancers du sein sont liés à une prédisposition génétique héréditaire</li>
+                                        <li>Les mutations des gènes BRCA1 et BRCA2 sont les plus fréquemment impliquées</li>
+                                        <li>Le risque est plus élevé si plusieurs membres de la famille ont été touchés, surtout à un jeune âge</li>
+                                    </ul>
+                                    <p class="mb-0">Si vous avez des antécédents familiaux de cancer du sein ou de l'ovaire, parlez-en à votre médecin qui pourra vous orienter vers une consultation d'oncogénétique si nécessaire.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-light py-4 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="h6">e-Rose Santé Communautaire</h3>
+                    <p class="small text-muted">
+                        Application de dépistage et d'information sur les cancers féminins pour les zones rurales.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="h6">Liens utiles</h4>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-muted">Mentions légales</a></li>
+                        <li><a href="#" class="text-muted">Confidentialité</a></li>
+                        <li><a href="#" class="text-muted">À propos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="h6">Contact</h4>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-phone-alt me-2 text-pink"></i> 800 00 000</li>
+                        <li><i class="fas fa-envelope me-2 text-pink"></i> contact@erose.org</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top small text-muted">
+                &copy; 2025 e-Rose - Tous droits réservés
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+    
+    <script>
+        // Script spécifique à la page cancer du sein
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestion du bouton de lecture audio
+            const readAloudBtn = document.getElementById('readAloudBtn');
+            if (readAloudBtn) {
+                readAloudBtn.addEventListener('click', function() {
+                    const content = [];
+                    content.push(document.querySelector('h1').textContent);
+                    document.querySelectorAll('section h2, section p, section li').forEach(el => {
+                        if (el.offsetParent !== null) { // Vérifier si l'élément est visible
+                            content.push(el.textContent);
+                        }
+                    });
+                    
+                    const textToRead = content.join('. ').replace(/\s+/g, ' ').trim();
+                    
+                    if ('speechSynthesis' in window) {
+                        const speech = new SpeechSynthesisUtterance();
+                        speech.text = textToRead;
+                        speech.lang = 'fr-FR';
+                        speech.rate = 0.9;
+                        window.speechSynthesis.speak(speech);
+                        
+                        // Changer l'icône pendant la lecture
+                        const icon = readAloudBtn.querySelector('i');
+                        const originalIcon = icon.className;
+                        icon.className = 'fas fa-stop me-2';
+                        
+                        // Remettre l'icône d'origine à la fin
+                        speech.onend = function() {
+                            icon.className = originalIcon;
+                        };
+                        
+                        // Arrêter la lecture si on clique à nouveau
+                        readAloudBtn.onclick = function() {
+                            window.speechSynthesis.cancel();
+                            icon.className = originalIcon;
+                            readAloudBtn.onclick = arguments.callee;
+                        };
+                    } else {
+                        alert('La synthèse vocale n\'est pas supportée par votre navigateur.');
+                    }
+                });
+            }
+            
+            // Gestion du bouton de rappel mensuel
+            const setReminderBtn = document.getElementById('setReminderBtn');
+            if (setReminderBtn) {
+                setReminderBtn.addEventListener('click', function() {
+                    // Vérifier les notifications
+                    if (!('Notification' in window)) {
+                        alert('Les notifications ne sont pas supportées par votre navigateur.');
+                        return;
+                    }
+                    
+                    // Demander la permission si nécessaire
+                    if (Notification.permission !== 'granted') {
+                        Notification.requestPermission().then(permission => {
+                            if (permission === 'granted') {
+                                scheduleMonthlyReminder();
+                            } else {
+                                alert('Les notifications sont nécessaires pour les rappels. Vous pouvez les activer dans les paramètres de votre navigateur.');
+                            }
+                        });
+                    } else {
+                        scheduleMonthlyReminder();
+                    }
+                });
+            }
+            
+            // Fonction pour planifier un rappel mensuel
+            function scheduleMonthlyReminder() {
+                // Demander à l'utilisateur de choisir une date et une heure
+                const now = new Date();
+                const defaultDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 9, 0, 0);
+                
+                // Créer un formulaire de rappel
+                const reminderForm = document.createElement('div');
+                reminderForm.innerHTML = `
+                    <div class="mb-3">
+                        <label for="reminderDate" class="form-label">Date et heure du premier rappel</label>
+                        <input type="datetime-local" class="form-control" id="reminderDate" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="repeatMonthly" checked>
+                        <label class="form-check-label" for="repeatMonthly">
+                            Répéter tous les mois
+                        </label>
+                    </div>
+                `;
+                
+                // Définir la date par défaut (demain à 9h)
+                const timezoneOffset = defaultDate.getTimezoneOffset() * 60000;
+                const localISOTime = (new Date(defaultDate - timezoneOffset)).toISOString().slice(0, 16);
+                reminderForm.querySelector('#reminderDate').value = localISOTime;
+                
+                // Afficher une modale de confirmation
+                if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                    const modal = new bootstrap.Modal(document.createElement('div'));
+                    const modalElement = document.createElement('div');
+                    modalElement.className = 'modal fade';
+                    modalElement.tabIndex = '-1';
+                    modalElement.innerHTML = `
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Programmer un rappel</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ${reminderForm.innerHTML}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <button type="button" class="btn btn-pink" id="confirmReminderBtn">Enregistrer</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(modalElement);
+                    modal._element = modalElement;
+                    modal.show();
+                    
+                    // Gérer la confirmation
+                    modalElement.querySelector('#confirmReminderBtn').addEventListener('click', function() {
+                        const dateInput = modalElement.querySelector('#reminderDate');
+                        const repeatMonthly = modalElement.querySelector('#repeatMonthly').checked;
+                        
+                        if (!dateInput.value) {
+                            alert('Veuillez sélectionner une date et une heure.');
+                            return;
+                        }
+                        
+                        const reminderDate = new Date(dateInput.value);
+                        const now = new Date();
+                        
+                        if (reminderDate < now) {
+                            alert('Veuillez sélectionner une date future.');
+                            return;
+                        }
+                        
+                        // Créer le rappel
+                        const reminder = {
+                            id: Date.now(),
+                            title: 'Auto-examen des seins',
+                            date: reminderDate.toISOString(),
+                            type: 'self_exam',
+                            repeat: repeatMonthly ? 'monthly' : 'once',
+                            notified: false
+                        };
+                        
+                        // Ajouter le rappel (fonction à implémenter dans app.js)
+                        if (window.app && typeof window.app.addReminder === 'function') {
+                            window.app.addReminder(reminder);
+                            
+                            // Afficher un message de confirmation
+                            const toast = document.createElement('div');
+                            toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3';
+                            toast.setAttribute('role', 'alert');
+                            toast.setAttribute('aria-live', 'assertive');
+                            toast.setAttribute('aria-atomic', 'true');
+                            toast.innerHTML = `
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        Rappel programmé avec succès pour le ${reminderDate.toLocaleDateString()} à ${reminderDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
+                                </div>
+                            `;
+                            
+                            document.body.appendChild(toast);
+                            const bsToast = new bootstrap.Toast(toast);
+                            bsToast.show();
+                            
+                            // Supprimer le toast après la fermeture
+                            toast.addEventListener('hidden.bs.toast', function() {
+                                document.body.removeChild(toast);
+                            });
+                            
+                            // Fermer la modale
+                            modal.hide();
+                            
+                            // Supprimer la modale du DOM après l'animation
+                            modalElement.addEventListener('hidden.bs.modal', function() {
+                                document.body.removeChild(modalElement);
+                            });
+                        } else {
+                            alert('Fonctionnalité de rappel non disponible.');
+                        }
+                    });
+                    
+                    // Nettoyer la modale après la fermeture
+                    modalElement.addEventListener('hidden.bs.modal', function() {
+                        document.body.removeChild(modalElement);
+                    });
+                } else {
+                    // Fallback si Bootstrap n'est pas disponible
+                    alert('Fonctionnalité de rappel non disponible.');
+                }
+            }
+            
+            // Gestion du bouton de planification de dépistage
+            const scheduleScreeningBtn = document.getElementById('scheduleScreeningBtn');
+            if (scheduleScreeningBtn) {
+                scheduleScreeningBtn.addEventListener('click', function() {
+                    // Rediriger vers la page de prise de rendez-vous ou afficher un formulaire
+                    alert('Fonctionnalité de prise de rendez-vous à venir. Veuillez contacter votre centre de dépistage le plus proche.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

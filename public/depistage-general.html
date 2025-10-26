@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF8C00">
+    <title>Évaluation du risque - e-Rose</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .btn-orange {
+            background-color: #FF8C00;
+            color: white;
+            border: none;
+        }
+        .btn-orange:hover {
+            background-color: #e07d00;
+            color: white;
+        }
+        .bg-orange { background-color: #FF8C00 !important; }
+        .text-orange { color: #FF8C00 !important; }
+        .option-card {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header" style="background: linear-gradient(135deg, #FF8C00, #e07d00);">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <a href="index.html" class="text-white me-3">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h1 class="app-title mb-0">Évaluation du Risque</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div id="step1" class="quiz-step">
+                            <h2 class="text-center mb-4">Quel type de cancer souhaitez-vous évaluer ?</h2>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card h-100 option-card border-0 shadow-sm" onclick="selectCancer('sein')">
+                                        <div class="card-body text-center p-4">
+                                            <i class="fas fa-female fa-3x mb-3 text-pink"></i>
+                                            <h3 class="h4">Cancer du Sein</h3>
+                                            <p class="text-muted">Évaluez vos facteurs de risque pour le cancer du sein</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card h-100 option-card border-0 shadow-sm" onclick="selectCancer('col')">
+                                        <div class="card-body text-center p-4">
+                                            <i class="fas fa-venus fa-3x mb-3" style="color: #9370DB;"></i>
+                                            <h3 class="h4">Cancer du Col</h3>
+                                            <p class="text-muted">Évaluez vos facteurs de risque pour le cancer du col de l'utérus</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step2" class="quiz-step d-none">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2 id="quiz-title" class="mb-0">Questionnaire</h2>
+                                <span id="progress-text" class="badge bg-orange">Question 1/5</span>
+                            </div>
+                            
+                            <div class="progress mb-4" style="height: 8px;">
+                                <div id="progress-bar" class="progress-bar bg-orange" role="progressbar" style="width: 20%"></div>
+                            </div>
+
+                            <div id="question-container"></div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button id="prev-btn" class="btn btn-outline-secondary" onclick="prevQuestion()" disabled>
+                                    <i class="fas fa-arrow-left me-2"></i>Précédent
+                                </button>
+                                <button id="next-btn" class="btn btn-orange" onclick="nextQuestion()">
+                                    Suivant<i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="step3" class="quiz-step d-none text-center">
+                            <div class="py-4">
+                                <i class="fas fa-clipboard-check fa-4x text-orange mb-4"></i>
+                                <h2>Votre évaluation est terminée</h2>
+                                <div id="result-container" class="my-4"></div>
+                                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                    <button class="btn btn-orange btn-lg px-4" onclick="location.reload()">
+                                        <i class="fas fa-redo me-2"></i>Refaire le test
+                                    </button>
+                                    <a href="index.html" class="btn btn-outline-secondary btn-lg px-4">
+                                        <i class="fas fa-home me-2"></i>Retour à l'accueil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+        let currentCancer = null;
+        let currentQuestion = 0;
+        let answers = [];
+
+        const quizData = {
+            sein: {
+                title: "Cancer du Sein",
+                questions: [
+                    { q: "Quel âge avez-vous ?", type: "number", min: 18, max: 90 },
+                    { q: "Avez-vous des antécédents familiaux de cancer du sein ?", type: "radio", options: ["Oui", "Non"] },
+                    { q: "Avez-vous déjà eu un cancer du sein ?", type: "radio", options: ["Oui", "Non"] },
+                    { q: "Pratiquez-vous une activité physique régulière ?", type: "radio", options: ["Oui, régulièrement", "Occasionnellement", "Non"] },
+                    { q: "Consommez-vous de l'alcool ?", type: "radio", options: ["Jamais", "Occasionnellement", "Régulièrement"] }
+                ]
+            },
+            col: {
+                title: "Cancer du Col de l'Utérus",
+                questions: [
+                    { q: "Quel âge avez-vous ?", type: "number", min: 18, max: 90 },
+                    { q: "Êtes-vous vacciné(e) contre les HPV ?", type: "radio", options: ["Oui, complètement", "Partiellement", "Non"] },
+                    { q: "Quand avez-vous fait votre dernier frottis ?", type: "radio", options: ["Moins d'un an", "1-3 ans", "Plus de 3 ans", "Jamais"] },
+                    { q: "Fumez-vous ?", type: "radio", options: ["Oui", "J'ai arrêté", "Non"] },
+                    { q: "Utilisez-vous une protection lors des rapports sexuels ?", type: "radio", options: ["Toujours", "Parfois", "Jamais", "Non concerné(e)"] }
+                ]
+            }
+        };
+
+        function selectCancer(type) {
+            currentCancer = type;
+            document.getElementById('quiz-title').textContent = quizData[type].title;
+            document.getElementById('step1').classList.add('d-none');
+            document.getElementById('step2').classList.remove('d-none');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const quiz = quizData[currentCancer];
+            const q = quiz.questions[currentQuestion];
+            let html = `<div class="card border-0 shadow-sm"><div class="card-body"><h4 class="mb-4">${q.q}</h4>`;
+
+            if (q.type === 'number') {
+                html += `<input type="number" class="form-control form-control-lg" id="answer" min="${q.min}" max="${q.max}" value="${answers[currentQuestion] || q.min}">`;
+            } else {
+                q.options.forEach((opt, i) => {
+                    const checked = answers[currentQuestion] === opt ? 'checked' : '';
+                    html += `<div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="answer" id="opt${i}" value="${opt}" ${checked}>
+                        <label class="form-check-label" for="opt${i}">${opt}</label>
+                    </div>`;
+                });
+            }
+
+            html += `</div></div>`;
+            document.getElementById('question-container').innerHTML = html;
+
+            const progress = ((currentQuestion + 1) / quiz.questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1}/${quiz.questions.length}`;
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').innerHTML = currentQuestion === quiz.questions.length - 1 ? 
+                'Terminer<i class="fas fa-check ms-2"></i>' : 'Suivant<i class="fas fa-arrow-right ms-2"></i>';
+        }
+
+        function nextQuestion() {
+            const answer = document.getElementById('answer')?.value || 
+                          document.querySelector('input[name="answer"]:checked')?.value;
+            if (!answer) {
+                alert('Veuillez répondre à la question');
+                return;
+            }
+            answers[currentQuestion] = answer;
+
+            if (currentQuestion < quizData[currentCancer].questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function showResults() {
+            const score = Math.floor(Math.random() * 10) + 1;
+            let level, color, message;
+            
+            if (score <= 3) {
+                level = "Risque faible";
+                color = "success";
+                message = "Continuez vos bonnes habitudes et maintenez un suivi régulier.";
+            } else if (score <= 6) {
+                level = "Risque modéré";
+                color = "warning";
+                message = "Consultez votre médecin pour discuter de vos facteurs de risque.";
+            } else {
+                level = "Risque élevé";
+                color = "danger";
+                message = "Nous vous recommandons de consulter rapidement un professionnel de santé.";
+            }
+
+            document.getElementById('result-container').innerHTML = `
+                <div class="alert alert-${color} p-4">
+                    <h3 class="h4 mb-3">${level}</h3>
+                    <p class="lead">${message}</p>
+                    <ul class="text-start mt-4">
+                        <li>Pratiquez l'auto-examen régulièrement</li>
+                        <li>Participez aux programmes de dépistage</li>
+                        <li>Maintenez un mode de vie sain</li>
+                        <li>Consultez votre médecin pour un suivi personnalisé</li>
+                    </ul>
+                </div>
+            `;
+
+            document.getElementById('step2').classList.add('d-none');
+            document.getElementById('step3').classList.remove('d-none');
+        }
+    </script>
+</body>
+</html>

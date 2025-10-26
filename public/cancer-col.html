@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#9370DB">
+    <title>Cancer du col de l'utérus - e-Rose</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .btn-purple { background-color: #9370DB; color: white; border: none; }
+        .btn-purple:hover { background-color: #7B5FC6; color: white; }
+        .text-purple { color: #9370DB; }
+        .bg-purple-light { background-color: rgba(147, 112, 219, 0.1); }
+        .symptom-card { border-left: 4px solid #9370DB; transition: all 0.3s; }
+        .symptom-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <header class="app-header" style="background: linear-gradient(135deg, #9370DB, #7B5FC6);">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <a href="index.html" class="text-white me-3"><i class="fas fa-arrow-left"></i></a>
+                    <h1 class="app-title mb-0">Cancer du Col de l'Utérus</h1>
+                </div>
+                <div class="d-flex">
+                    <button id="audioToggle" class="btn btn-sm btn-outline-light me-2">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button id="languageToggle" class="btn btn-sm btn-outline-light">
+                        <i class="fas fa-language"></i> FR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <div class="alert alert-info d-flex align-items-center">
+            <i class="fas fa-info-circle me-2"></i>
+            <div>La vaccination et le dépistage régulier permettent de prévenir la plupart des cancers du col de l'utérus.</div>
+        </div>
+
+        <!-- Introduction -->
+        <section class="mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-3">Qu'est-ce que le cancer du col de l'utérus ?</h2>
+                    <p class="lead">Le cancer du col de l'utérus se développe à partir de la muqueuse du col utérin.</p>
+                    <p>Dans 99% des cas, il est causé par une infection persistante par des <strong>papillomavirus humains (HPV)</strong>. 
+                    La vaccination et le dépistage régulier permettent de le prévenir efficacement.</p>
+                    <button class="btn btn-purple mt-2" id="readAloudBtn">
+                        <i class="fas fa-volume-up me-2"></i>Écouter
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 text-purple"><i class="fas fa-chart-line me-2"></i>Chiffres clés</h3>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>99% des cas liés à l'HPV</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Vaccin dès 11 ans</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Dépistage dès 25 ans</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>90% de guérison si détecté tôt</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Symptômes -->
+        <section class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-exclamation-triangle text-purple me-2"></i>Symptômes à surveiller</h2>
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <strong>Important :</strong> Aux stades précoces, le cancer ne présente souvent aucun symptôme. 
+                C'est pourquoi le dépistage régulier est essentiel.
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 symptom-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-purple-light rounded-circle p-3 me-3">
+                                    <i class="fas fa-droplet text-purple" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 class="h5 mb-0">Saignements anormaux</h3>
+                            </div>
+                            <p>Saignements entre les règles, après les rapports sexuels ou après la ménopause.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 symptom-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-purple-light rounded-circle p-3 me-3">
+                                    <i class="fas fa-water text-purple" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 class="h5 mb-0">Pertes vaginales</h3>
+                            </div>
+                            <p>Pertes inhabituelles, malodorantes ou contenant du sang.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 symptom-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-purple-light rounded-circle p-3 me-3">
+                                    <i class="fas fa-hand-fist text-purple" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 class="h5 mb-0">Douleurs pelviennes</h3>
+                            </div>
+                            <p>Douleurs dans le bas-ventre ou pendant les rapports sexuels.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 symptom-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-purple-light rounded-circle p-3 me-3">
+                                    <i class="fas fa-notes-medical text-purple" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 class="h5 mb-0">Symptômes avancés</h3>
+                            </div>
+                            <p>Problèmes urinaires, douleurs lombaires, perte de poids inexpliquée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prévention -->
+        <section class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-shield-alt text-purple me-2"></i>Prévention</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-purple text-white">
+                            <i class="fas fa-syringe me-2"></i><strong>Vaccination contre les HPV</strong>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h6">Pourquoi se faire vacciner ?</h3>
+                            <p>Le vaccin protège contre les types d'HPV les plus dangereux (16 et 18) responsables de 70% des cancers du col.</p>
+                            <h3 class="h6 mt-3">À quel âge ?</h3>
+                            <ul>
+                                <li><strong>11-14 ans</strong> : Âge recommandé (2 doses)</li>
+                                <li><strong>15-19 ans</strong> : Rattrapage possible (3 doses)</li>
+                                <li>Le vaccin est recommandé pour filles ET garçons</li>
+                            </ul>
+                            <div class="alert alert-info mt-3 mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <small>Plus efficace avant le début de la vie sexuelle.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-success text-white">
+                            <i class="fas fa-heartbeat me-2"></i><strong>Autres mesures</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-shield-virus text-success me-2"></i>
+                                <strong>Protection lors des rapports</strong>
+                                <p class="small mb-0">Le préservatif réduit le risque de transmission des HPV.</p>
+                            </div>
+                            <div class="mb-3">
+                                <i class="fas fa-smoking-ban text-success me-2"></i>
+                                <strong>Ne pas fumer</strong>
+                                <p class="small mb-0">Le tabac augmente le risque en cas d'infection HPV.</p>
+                            </div>
+                            <div class="mb-3">
+                                <i class="fas fa-clipboard-check text-success me-2"></i>
+                                <strong>Dépistage régulier</strong>
+                                <p class="small mb-0">Même vaccinée, le dépistage reste nécessaire.</p>
+                            </div>
+                            <div class="alert alert-warning mt-3 mb-0">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <small><strong>Important :</strong> La vaccination ne remplace pas le dépistage !</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dépistage -->
+        <section class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-clinic-medical text-purple me-2"></i>Dépistage</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">Le frottis cervico-utérin</h3>
+                            <p>Examen de référence pour détecter des lésions précancéreuses avant qu'elles n'évoluent en cancer.</p>
+                            <h4 class="h6 mt-4 mb-3">Comment se déroule l'examen ?</h4>
+                            <ol>
+                                <li>Position gynécologique</li>
+                                <li>Introduction d'un spéculum</li>
+                                <li>Prélèvement de cellules avec une brosse</li>
+                                <li>Analyse en laboratoire</li>
+                                <li>Résultats sous 2-3 semaines</li>
+                            </ol>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Examen rapide, indolore mais peut être légèrement inconfortable.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-purple text-white">
+                            <i class="far fa-calendar-alt me-2"></i><strong>Calendrier</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h4 class="h6">25-29 ans</h4>
+                                <p class="small mb-1"><strong>Frottis</strong> tous les <strong>3 ans</strong></p>
+                                <span class="badge bg-primary">Recommandé</span>
+                            </div>
+                            <div class="mb-3">
+                                <h4 class="h6">30-65 ans</h4>
+                                <p class="small mb-1"><strong>Test HPV</strong> tous les <strong>5 ans</strong></p>
+                                <span class="badge bg-danger">Essentiel</span>
+                            </div>
+                            <div class="mb-3">
+                                <h4 class="h6">Après 65 ans</h4>
+                                <p class="small mb-1">Arrêt si examens précédents normaux</p>
+                                <span class="badge bg-secondary">À discuter</span>
+                            </div>
+                            <button class="btn btn-purple w-100 mt-3">
+                                <i class="far fa-calendar-plus me-2"></i>Planifier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-question-circle text-purple me-2"></i>Questions fréquentes</h2>
+            <div class="accordion" id="faq">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Le vaccin HPV est-il efficace ?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            Oui, très efficace ! Protège à plus de 90% contre les infections par les types d'HPV contenus dans le vaccin.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Le frottis est-il douloureux ?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            Non, généralement pas douloureux mais peut être inconfortable. Respirez calmement pour réduire la gêne.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Dois-je me faire dépister si je suis vaccinée ?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            Oui, absolument ! Le vaccin ne protège pas contre tous les types d'HPV. Le dépistage reste indispensable.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 e-Rose - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('readAloudBtn')?.addEventListener('click', function() {
+            if ('speechSynthesis' in window) {
+                const text = document.querySelector('section p').textContent;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'fr-FR';
+                window.speechSynthesis.speak(utterance);
+            }
+        });
+    </script>
+</body>
+</html>
